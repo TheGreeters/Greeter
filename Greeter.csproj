@@ -77,6 +77,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Customer.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\MoveSprite.cs" />
+    <Compile Include="Assets\Scripts\PlayerLanes.cs" />
+    <Compile Include="Assets\Scripts\Player_Actions.cs" />
     <Compile Include="Assets\Scripts\SpawnTimer.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
   </ItemGroup>

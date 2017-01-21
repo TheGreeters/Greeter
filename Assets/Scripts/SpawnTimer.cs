@@ -14,7 +14,7 @@ public class SpawnTimer : MonoBehaviour {
         for(var i = 0; i < transform.childCount; i++)
         {
             Spawns[i] = (Spawner)transform.GetChild(i).GetComponent(typeof(Spawner));
-            Spawns[i].SpawnId = i;
+            Spawns[i].SpawnId = i + 1;
         }
     }
  
