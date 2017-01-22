@@ -2,9 +2,9 @@
 A fun game about greeting people in store. This was created in under 48 hours for Global Game Jam 2017.
 
 ## Credits
-**Michael Kirkpatrick**
-**Michael Joy**
-**John Hutchens**
+* **Michael Kirkpatrick**
+* **Michael Joy**
+* **John Hutchens**
 
 Sound by **Ben Alexander**
 
