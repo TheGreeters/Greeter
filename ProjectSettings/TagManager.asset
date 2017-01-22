@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CustomerLane1
+  - CustomerLane2
+  - CustomerLane3
+  - Customer
+  - CustomerWavedAt
   layers:
   - Default
   - TransparentFX
@@ -13,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Crowd
   - 
   - 
   - 
@@ -38,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Crowd
+    uniqueID: 3131241835
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

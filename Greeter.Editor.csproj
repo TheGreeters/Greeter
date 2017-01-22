@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C5A0A95D-5FC1-3474-2A82-C7104C0887F0}</ProjectGuid>
+    <ProjectGuid>{4FA72A5C-96AC-DE21-CDA9-85D27506CB7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -55,6 +55,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -97,6 +100,9 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.VR">
       <HintPath>Library\UnityAssemblies\UnityEditor.VR.dll</HintPath>
     </Reference>
@@ -118,21 +124,51 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Google.IOSResolver">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.IOSResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.JarResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.VersionHandler.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Greeter.csproj">
-      <Project>{43CF046E-2D1A-B409-4879-F4B4A6CFAA15}</Project>
+      <Project>{2A95B2DB-E698-1412-3D6E-C4AD948C2480}</Project>
       <Name>Greeter</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Spriter2UnityDX\Editor\AnimationBuilder.cs" />
-    <Compile Include="Assets\Spriter2UnityDX\Editor\CustomEditors.cs" />
-    <Compile Include="Assets\Spriter2UnityDX\Editor\PrefabBuilder.cs" />
-    <Compile Include="Assets\Spriter2UnityDX\Editor\S2USettings.cs" />
-    <Compile Include="Assets\Spriter2UnityDX\Editor\ScmlImportOptions.cs" />
-    <Compile Include="Assets\Spriter2UnityDX\Editor\ScmlPostProcessor.cs" />
-    <Compile Include="Assets\Spriter2UnityDX\Editor\ScmlSupport.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSDependencies.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSDocsUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSIOSSetupUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSPostBuild.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSProjectSettings.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSStrings.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSUpgrader.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\GPGSUtil.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\NearbyConnectionUI.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\PlistBuddyHelper.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Elements.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Lexer.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Objects.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\PBXProject.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Parser.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Sections.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Serializer.cs" />
+    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Game Jam Template\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Game Jam Template\GameJamTemplateReadMe.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
+    <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
