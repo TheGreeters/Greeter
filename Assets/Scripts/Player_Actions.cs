@@ -157,7 +157,24 @@ public class Player_Actions : MonoBehaviour {
 
                     UpdateCustomerAudioClip(currentCustomer, inHappyZone);
 
-                    break;
+					//ACHIEVEMENT GET!
+					Achieve.UnlockAchievement(Achievement.FirstWave);
+					SpriteRenderer spriteRender = currentCustomer.GetComponent<SpriteRenderer>();
+					if (spriteRender.sprite.name.StartsWith("person_04")
+						|| spriteRender.sprite.name.StartsWith("person_08"))
+					{
+						Achieve.UnlockAchievement(Achievement.BingoNight);
+					}
+					else if (spriteRender.sprite.name.StartsWith("person_16"))
+					{
+						Achieve.UnlockAchievement(Achievement.Alien);
+					}
+					else if (spriteRender.sprite.name.StartsWith("person_17"))
+					{
+						Achieve.UnlockAchievement(Achievement.TogaParty);
+					}
+
+					break;
                 }
 
                 
@@ -167,8 +184,8 @@ public class Player_Actions : MonoBehaviour {
             if (inHappyZone)
             {
                 GameController.AddScore(mood * successMultiplier);
-                GameController.AddSatisfaction(mood); 
-            }
+                GameController.AddSatisfaction(mood);
+			}
             else
             {
                 //GameController.AddScore(mood * failMultiplier);
@@ -216,18 +233,18 @@ public class Player_Actions : MonoBehaviour {
 
         int customerMood = GetCustomerMood(currentCustomer);
 
-        if (customerPosition > smallHappyZoneMin && customerPosition < smallHappyZoneMax)
+        if (customerPosition >= smallHappyZoneMin && customerPosition <= smallHappyZoneMax)
         {
             return true;
         }
-        else if (customerPosition > largeHappyZoneMin && customerPosition < largeHappyZoneMax && customerMood < 3)
+        else if (customerPosition >= largeHappyZoneMin && customerPosition <= largeHappyZoneMax && customerMood < 3)
         {
             return true;
         }
-        else if (customerPosition > largeHappyZoneMin && customerPosition < largeHappyZoneMax && customerMood < 3)
-        {
-            return true;
-        }
+		else if (customerMood < 2) //Customers with mood of 1 are happy and will always wave back
+		{
+			return true;
+		}
         else
         {
             return false;

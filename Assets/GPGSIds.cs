@@ -24,7 +24,12 @@
 
 public static class GPGSIds
 {
+        public const string achievement_max_satisfaction = "CgkIhr--hY4cEAIQAw"; // <GPGSID>
+        public const string achievement_toga_party = "CgkIhr--hY4cEAIQBA"; // <GPGSID>
+        public const string achievement_first_wave = "CgkIhr--hY4cEAIQAg"; // <GPGSID>
+        public const string achievement_extraterrestrial_encounter = "CgkIhr--hY4cEAIQBQ"; // <GPGSID>
         public const string leaderboard_greeter__high_scores = "CgkIhr--hY4cEAIQAQ"; // <GPGSID>
+        public const string achievement_bingo_night_here_i_come = "CgkIhr--hY4cEAIQBg"; // <GPGSID>
 
 }
 

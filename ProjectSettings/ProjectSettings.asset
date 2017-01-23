@@ -195,13 +195,13 @@ PlayerSettings:
   iOSMetalForceHardShadows: 0
   appleDeveloperTeamID: 
   AndroidTargetDevice: 0
-  AndroidSplashScreenScale: 2
+  AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: d4d1afcce1d198b42b0447de1b64d416, type: 3}
-  AndroidKeystoreName: C:/Users/tehcu/Documents/Greeter/user.keystore
+  AndroidKeystoreName: C:/Users/TehCupcakes/Documents/Greeter/user.keystore
   AndroidKeyaliasName: greeter
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
-  androidEnableBanner: 0
+  androidEnableBanner: 1
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -213,7 +213,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: aaecf41a43a0b7a4a8e149826f4f7544, type: 3}
+      m_Icon: {fileID: 2800000, guid: 1e9776f4796191c49b2a5224f54f257c, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []
@@ -390,14 +390,14 @@ PlayerSettings:
   additionalIl2CppArgs: 
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: GreeterTest
+  metroPackageName: Greeter
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: GreeterTest
+  metroApplicationDescription: Greeter
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -422,7 +422,7 @@ PlayerSettings:
   tizenGPSPermissions: 0
   tizenMicrophonePermissions: 0
   tizenDeploymentTarget: 
-  tizenDeploymentTargetType: 0
+  tizenDeploymentTargetType: -269686532
   tizenMinOSVersion: 0
   n3dsUseExtSaveData: 0
   n3dsCompressStaticMem: 1
@@ -466,7 +466,6 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Collab: 1
-    UNet: 1
   cloudProjectId: d4f7d3b9-9b56-4132-a49d-9fe9519154de
   projectName: Greeter
   organizationId: tehcupcakes

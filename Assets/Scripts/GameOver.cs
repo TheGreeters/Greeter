@@ -14,9 +14,10 @@ public class GameOver : MonoBehaviour {
 
         GameObject.Find("ScoreLabel").GetComponent<Text>().text = "Score: " + Score;
 
-        GooglePlayServices services = GameObject.Find("GooglePlayServices").GetComponent<GooglePlayServices>();
-        if (services != null)
-        {
+		GameObject GP = GameObject.Find("GooglePlayServices");
+		if(GP != null)
+		{
+			GooglePlayServices services = GP.GetComponent<GooglePlayServices>();
             services.OnAddScoreToLeaderBoard(Score);
         }
 

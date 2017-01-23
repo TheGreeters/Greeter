@@ -101,7 +101,12 @@ public class GameController : MonoBehaviour {
         bar.GetComponent<Image>().color = Color.HSVToRGB(0.30f * (Satisfaction / 100), 1, 1);
         RectTransform barTransform = bar.GetComponent<RectTransform>();
         barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, 0);
-        barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -195 + Mathf.Round(Satisfaction) * 1.95f);
+        barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -400 + Mathf.Round(Satisfaction) * 4);
+
+		if(Mathf.Round(Satisfaction) >= 100)
+		{
+			Achieve.UnlockAchievement(Achievement.MaxSatisfaction);
+		}
     }
 
     void UpdateBackgroundMusic(bool gameOver)
