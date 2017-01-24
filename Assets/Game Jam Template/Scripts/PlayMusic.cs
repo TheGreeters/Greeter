@@ -7,8 +7,7 @@ public class PlayMusic : MonoBehaviour {
 
 
 	public AudioClip titleMusic;					//Assign Audioclip for title music loop
-	public AudioClip mainMusic;						//Assign Audioclip for main 
-    public AudioClip gameOverMusic;                 //Assign Audioclip for gameOver
+	public AudioClip mainMusic;						//Assign Audioclip for main
 	public AudioMixerSnapshot volumeDown;			//Reference to Audio mixer snapshot in which the master volume of main mixer is turned down
 	public AudioMixerSnapshot volumeUp;				//Reference to Audio mixer snapshot in which the master volume of main mixer is turned up
 
@@ -33,16 +32,10 @@ public class PlayMusic : MonoBehaviour {
 			//If scene index is 0 (usually title scene) assign the clip titleMusic to musicSource
 			case 0:
 				musicSource.clip = titleMusic;
-                musicSource.loop = true;
 				break;
 			//If scene index is 1 (usually main scene) assign the clip mainMusic to musicSource
 			case 1:
 				musicSource.clip = mainMusic;
-                musicSource.loop = true;
-                break;
-            case 2:
-                musicSource.clip = gameOverMusic;
-                musicSource.loop = false;
                 break;
 		}
 		//Fade up the volume very quickly, over resetTime seconds (.01 by default)
@@ -58,14 +51,14 @@ public class PlayMusic : MonoBehaviour {
 		//This switch looks at the integer parameter musicChoice to decide which music clip to play.
 		switch (musicChoice) 
 		{
-		//if musicChoice is 0 assigns titleMusic to audio source
-		case 0:
-			musicSource.clip = titleMusic;
-			break;
-			//if musicChoice is 1 assigns mainMusic to audio source
-		case 1:
-			musicSource.clip = mainMusic;
-			break;
+			//if musicChoice is 0 assigns titleMusic to audio source
+			case 0:
+				musicSource.clip = titleMusic;
+				break;
+				//if musicChoice is 1 assigns mainMusic to audio source
+			case 1:
+				musicSource.clip = mainMusic;
+				break;
 		}
 		//Play the selected clip
 		musicSource.Play ();
@@ -83,5 +76,10 @@ public class PlayMusic : MonoBehaviour {
 	{
 		//call the TransitionTo function of the audioMixerSnapshot volumeDown;
 		volumeDown.TransitionTo (fadeTime);
+	}
+
+	public void StopMusic()
+	{
+		musicSource.Stop();
 	}
 }

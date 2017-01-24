@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GooglePlayGames;
 
 public enum Achievement
 {
@@ -24,7 +25,7 @@ public class Achieve : MonoBehaviour {
 
 	public static void UnlockAchievement(Achievement achievementId)
 	{
-		if (AchievementIds.ContainsKey(achievementId))
+		if (PlayGamesPlatform.Instance.IsAuthenticated() && AchievementIds.ContainsKey(achievementId))
 		{
 			Social.ReportProgress(AchievementIds[achievementId], 100, (bool success) => {
 				// handle success or failure

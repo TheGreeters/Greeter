@@ -12,9 +12,6 @@ public class GameController : MonoBehaviour {
     static int Score;
     static int HighScore;
 
-    static string gameOverMusic = "";
-    static string backgroundMusic = "Sounds/intro_music_gjt";
-
     public const float MaxSpeed = 4f; //Let's be reasonable now
 
 	// Use this for initialization
@@ -25,22 +22,16 @@ public class GameController : MonoBehaviour {
         {
             Satisfaction = 50f;
             Score = 0;
-
-            //UpdateBackgroundMusic(true);
         }
         else
         {
             UpdateHighScore();
-
-            //UpdateBackgroundMusic(false);
         }
 
         GameSpeed = 1f;
 
         UpdateScore();
         GameController.AddSatisfaction(0); //Add 0 because this causes the bar fill to update color/size
-
-
     }
 	
 	// Update is called once per frame
@@ -108,32 +99,4 @@ public class GameController : MonoBehaviour {
 			Achieve.UnlockAchievement(Achievement.MaxSatisfaction);
 		}
     }
-
-    void UpdateBackgroundMusic(bool gameOver)
-    {
-        string audioClipName;
-        AudioClip soundClip;
-        AudioSource customerAudio = gameObject.GetComponent<AudioSource>();
-
-        if (gameOver)
-        {
-            audioClipName = gameOverMusic;
-
-            soundClip = Resources.Load<AudioClip>(audioClipName);
-
-            customerAudio.clip = soundClip;
-        }
-        else
-        {
-            audioClipName = backgroundMusic;
-
-            soundClip = Resources.Load<AudioClip>(audioClipName);
-
-            customerAudio.clip = soundClip;
-        }
-
-        customerAudio.Play();
-    }
-
-
 }
