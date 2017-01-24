@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
-
-    static int Score;
-
+	
 	//These variable values are stolen from the MenuUI object.
 	private int sceneToStart = 1;
 	private PlayMusic playMusic;
@@ -15,33 +13,39 @@ public class GameOver : MonoBehaviour {
 	void Awake ()
 	{
 		GameObject menuUI = GameObject.Find("MenuUI");
-		playMusic = menuUI.GetComponent<PlayMusic>();
-		sceneToStart = menuUI.GetComponent<StartOptions>().sceneToStart;
+		if (menuUI != null)
+		{
+			playMusic = menuUI.GetComponent<PlayMusic>();
+			sceneToStart = menuUI.GetComponent<StartOptions>().sceneToStart;
+		}
 	} 
 
 	// Use this for initialization
 	void Start () {
 
-		PlayMusic musicScript = GameObject.Find("MenuUI").GetComponent<PlayMusic>();
-		musicScript.StopMusic();
+		if (playMusic != null)
+		{
+			playMusic.StopMusic();
+		}
 
-        Score = GameController.GetScore();
-
-        GameObject.Find("ScoreLabel").GetComponent<Text>().text = "Score: " + Score;
+        GameObject.Find("ScoreLabel").GetComponent<Text>().text = "Score: " + GameController.Score;
 
 		GameObject GP = GameObject.Find("GooglePlayServices");
 		if(GP != null)
 		{
 			GooglePlayManager services = GP.GetComponent<GooglePlayManager>();
-            services.OnAddScoreToLeaderBoard(Score);
+            services.OnAddScoreToLeaderBoard(GameController.Score);
         }
 
     }
 
 	public void TryAgainButtonClicked()
 	{
-		playMusic.FadeUp(0.01f);
-		playMusic.PlaySelectedMusic(1);
+		if (playMusic != null)
+		{
+			playMusic.FadeUp(0.01f);
+			playMusic.PlaySelectedMusic(1);
+		}
 		SceneManager.LoadScene(sceneToStart);
 	}
 }

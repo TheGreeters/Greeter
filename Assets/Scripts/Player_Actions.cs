@@ -124,100 +124,64 @@ public class Player_Actions : MonoBehaviour {
 
         GameObject[] customerArray = GameObject.FindGameObjectsWithTag("CustomerLane" + (currentLane).ToString());
 
-        bool inHappyZone = false;
-
-        int mood = 0;
-
-        float customerPosition;
-
         if (customerArray != null && customerArray.Length > 0)
         {
-            GameObject lanes = GameObject.Find("Lanes");
+			GameObject closestCustomer = null;
 
-            foreach (GameObject currentCustomer in customerArray)
-            {
-
-                mood = GetCustomerMood(currentCustomer);
-
-                customerPosition = currentCustomer.transform.position.z;
-
-
-                if (CustomerInHappyZone(currentCustomer)
-                    && customerPosition + lanes.transform.position.z > gameObject.transform.position.z
+			foreach (GameObject currentCustomer in customerArray)
+			{
+				if(currentCustomer.transform.position.z > gameObject.transform.position.z
                     && (!currentCustomer.GetComponent<Customer>().Greeted 
-                        || !currentCustomer.GetComponent<Customer>().FailedGreeting))
-                {
-                    inHappyZone = true;
-
-                    Customer customerScript = currentCustomer.GetComponent<Customer>();
-
-                    customerScript.Greeted = true;
-
-                    currentCustomer.tag = "CustomerWavedAt";
-
-                    UpdateCustomerAudioClip(currentCustomer, inHappyZone);
-
-					//ACHIEVEMENT GET!
-					Achieve.UnlockAchievement(Achievement.FirstWave);
-					SpriteRenderer spriteRender = currentCustomer.GetComponent<SpriteRenderer>();
-					if (spriteRender.sprite.name.StartsWith("person_04")
-						|| spriteRender.sprite.name.StartsWith("person_08"))
-					{
-						Achieve.UnlockAchievement(Achievement.BingoNight);
-					}
-					else if (spriteRender.sprite.name.StartsWith("person_16"))
-					{
-						Achieve.UnlockAchievement(Achievement.Alien);
-					}
-					else if (spriteRender.sprite.name.StartsWith("person_17"))
-					{
-						Achieve.UnlockAchievement(Achievement.TogaParty);
-					}
-
-					break;
-                }
-
-                
-
-            }
-
-            if (inHappyZone)
-            {
-                GameController.AddScore(mood * successMultiplier);
-                GameController.AddSatisfaction(mood);
+                        || !currentCustomer.GetComponent<Customer>().FailedGreeting)
+					&& (closestCustomer == null || currentCustomer.transform.position.z < closestCustomer.transform.position.z))
+				{
+					closestCustomer = currentCustomer;
+				}
 			}
+			
+            int mood = GetCustomerMood(closestCustomer);
+			Customer customerScript = closestCustomer.GetComponent<Customer>();
+
+			if (CustomerInHappyZone(closestCustomer))
+            {
+				GameController.AddScore(mood * successMultiplier);
+				GameController.AddSatisfaction(mood);
+
+                customerScript.Greeted = true;
+
+                closestCustomer.tag = "CustomerWavedAt";
+
+                UpdateCustomerAudioClip(closestCustomer, true);
+
+				//ACHIEVEMENT GET!
+				Achieve.UnlockAchievement(Achievement.FirstWave);
+				SpriteRenderer spriteRender = closestCustomer.GetComponent<SpriteRenderer>();
+				if (spriteRender.sprite.name.StartsWith("person_04")
+					|| spriteRender.sprite.name.StartsWith("person_08"))
+				{
+					Achieve.UnlockAchievement(Achievement.BingoNight);
+				}
+				else if (spriteRender.sprite.name.StartsWith("person_16"))
+				{
+					Achieve.UnlockAchievement(Achievement.Alien);
+				}
+				else if (spriteRender.sprite.name.StartsWith("person_17"))
+				{
+					Achieve.UnlockAchievement(Achievement.TogaParty);
+				}
+            }
             else
             {
                 //GameController.AddScore(mood * failMultiplier);
                 GameController.AddSatisfaction(mood * failMultiplier);
 
-                GameObject disappointedCustomer;
-
-                disappointedCustomer = customerArray[0];
-
-                foreach (GameObject currentCustomer in customerArray)
-                {
-                    if (currentCustomer.transform.position.z < disappointedCustomer.transform.position.z
-                        && currentCustomer.transform.position.z + lanes.transform.position.z > gameObject.transform.position.z
-                        && (!currentCustomer.GetComponent<Customer>().Greeted
-                            || !currentCustomer.GetComponent<Customer>().FailedGreeting))
-                    {
-                        disappointedCustomer = currentCustomer;
-                    }
-                }
-
-                Customer customerScript = disappointedCustomer.GetComponent<Customer>();
-
                 customerScript.FailedGreeting = true;
 
-                disappointedCustomer.tag = "CustomerWavedAt";
+                closestCustomer.tag = "CustomerWavedAt";
 
-                //UpdateCustomerAudioClip(disappointedCustomer, inHappyZone);
+                //UpdateCustomerAudioClip(closestCustomer, false);
             }
-
-
         }
- 
     }
 
     int GetCustomerMood(GameObject currentCustomer)

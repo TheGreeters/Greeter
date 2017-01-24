@@ -9,10 +9,10 @@ public class Spawner : MonoBehaviour {
     public int SpawnId = 1; //IMPORTANT: Make sure to set this unique for each spawner in the inspector
 
     private const float PlayerWidth = 0.75f;
-    private const float LaneSize = 1.5f;
-    private const int NumberOfCustomerSprites = 17;
+    private const float LaneSize = 1.4f;
+    private const int NumberOfNormalCustomerSprites = 15;
 
-    private List<int> happySprites = new List<int>(new int[] { 3, 10 });
+	private List<int> happySprites = new List<int>(new int[] { 3, 10 });
     private List<int> angrySprites = new List<int>(new int[] { 4, 8 });
 
     public void Spawn()
@@ -68,7 +68,22 @@ public class Spawner : MonoBehaviour {
 
     private int ChooseSprite()
     {
-        return Random.Range(1, NumberOfCustomerSprites + 1);
+		//NOTE: This method relies on all special customers being sequentially numbered AFTER all normal customers.
+		int result = 1;
+		switch(Random.Range(0, 100)) //NOTE: excludes 100... 1% chance for each result from 0-99
+		{
+			case 99:
+				result = 16; //Alien
+				break;
+			case 98:
+				result = 17; //Toga Man
+				break;
+			default:
+				//98% of the time, just spawn a normal customer
+				result = Random.Range(1, NumberOfNormalCustomerSprites + 1);
+				break;
+		}
+		return result;
 
     }
 }
