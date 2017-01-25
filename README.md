@@ -1,5 +1,6 @@
 # Greeter
-A fun game about greeting people in store. This was created in under 48 hours for Global Game Jam 2017.
+A fun game about greeting people in store.
+The original version was created in under 48 hours for Global Game Jam 2017. It has since undergone additional polishing and bug fixes in order to prepare for a free Android release.
 
 ## Credits
 * **Michael Kirkpatrick**
