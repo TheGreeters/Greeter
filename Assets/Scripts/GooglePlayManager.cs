@@ -11,6 +11,7 @@ public class GooglePlayManager : MonoBehaviour
 	
     void Start()
     {
+#if UNITY_ANDROID
 		if (Application.platform == RuntimePlatform.Android)
 		{
 #if UNITY_EDITOR
@@ -25,10 +26,12 @@ public class GooglePlayManager : MonoBehaviour
 				LogIn();
 			}
 		}
+#endif
     }
 
 	public void ToggleLogin()
 	{
+#if UNITY_ANDROID
 		if(Social.Active.GetType() == typeof(PlayGamesPlatform) && Social.localUser.authenticated)
 		{
 			OnLogOut();
@@ -37,6 +40,7 @@ public class GooglePlayManager : MonoBehaviour
 		{
 			LogIn();
 		}
+#endif
 	}
 	
     /// <summary>
@@ -75,7 +79,9 @@ public class GooglePlayManager : MonoBehaviour
     /// </summary>
     public void OnShowLeaderBoard()
     {
-        ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI(leaderboard); // Show current (Active) leaderboard
+#if UNITY_ANDROID
+		((PlayGamesPlatform)Social.Active).ShowLeaderboardUI(leaderboard); // Show current (Active) leaderboard
+#endif
     }
 
     /// <summary>
@@ -104,13 +110,15 @@ public class GooglePlayManager : MonoBehaviour
     /// </summary>
     public void OnLogOut()
     {
-        ((PlayGamesPlatform)Social.Active).SignOut();
+#if UNITY_ANDROID
+		((PlayGamesPlatform)Social.Active).SignOut();
 
 		PlayerPrefs.SetInt("UseGooglePlayGames", 0);
 		PlayerPrefs.Save();
 
 		UpdateUI(false);
-    }
+#endif
+	}
 
 	public void UpdateUI(bool loggedIn)
 	{

@@ -21,6 +21,7 @@ public class GameOver : MonoBehaviour {
 			playMusic = menuUI.GetComponent<PlayMusic>();
 			sceneToStart = menuUI.GetComponent<StartOptions>().sceneToStart;
 		}
+#if UNITY_ANDROID
 		GameObject GPObject = GameObject.Find("GooglePlayManager");
 		if(GPObject != null)
 		{
@@ -28,6 +29,7 @@ public class GameOver : MonoBehaviour {
 			GPM = GPObject.GetComponent<GooglePlayManager>();
 			GPM.UpdateUI(loggedIn);
 		}
+#endif
 	} 
 
 	// Use this for initialization

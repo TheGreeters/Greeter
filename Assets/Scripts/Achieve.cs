@@ -25,11 +25,13 @@ public class Achieve : MonoBehaviour {
 
 	public static void UnlockAchievement(Achievement achievementId)
 	{
+#if UNITY_ANDROID
 		if (PlayGamesPlatform.Instance.IsAuthenticated() && AchievementIds.ContainsKey(achievementId))
 		{
 			Social.ReportProgress(AchievementIds[achievementId], 100, (bool success) => {
 				// handle success or failure
 			});
 		}
+#endif
 	}
 }

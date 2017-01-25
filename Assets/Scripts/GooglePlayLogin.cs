@@ -11,6 +11,7 @@ public class GooglePlayLogin : MonoBehaviour {
 
 	private void Start()
 	{
+#if UNITY_ANDROID
 		if(Social.Active.GetType() == typeof(PlayGamesPlatform) && Social.localUser.authenticated)
 		{
 			gameObject.GetComponent<Image>().sprite = LoggedInImage;
@@ -19,6 +20,7 @@ public class GooglePlayLogin : MonoBehaviour {
 		{
 			gameObject.GetComponent<Image>().sprite = LoggedOutImage;
 		}
+#endif
 	}
 
 	public void Activate()
