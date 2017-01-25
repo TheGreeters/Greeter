@@ -51,10 +51,18 @@ public class Pause : MonoBehaviour {
 	{
 		//Set isPaused to false
 		isPaused = false;
+		//call the HidePausePanel function of the ShowPanels script
+		showPanels.HidePausePanel();
+		
+		//Reset input so we do not get any touch or tap detection this frame
+		Input.ResetInputAxes();
+		//Disable input and set a time for it to be reenabled a second later
+		InputManager input = GameObject.Find("EventSystem").GetComponent<InputManager>();
+		input.DisableInput();
+		input.Invoke("EnableInput", 0.1f);
+
 		//Set time.timescale to 1, this will cause animations and physics to continue updating at regular speed
 		Time.timeScale = GameController.GameSpeed;
-		//call the HidePausePanel function of the ShowPanels script
-		showPanels.HidePausePanel ();
 	}
 
 

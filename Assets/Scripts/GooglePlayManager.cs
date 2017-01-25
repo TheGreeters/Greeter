@@ -2,6 +2,7 @@
 using System.Collections;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
 
 public class GooglePlayManager : MonoBehaviour
 {
@@ -16,13 +17,27 @@ public class GooglePlayManager : MonoBehaviour
 			// recommended for debugging:
 			PlayGamesPlatform.DebugLogEnabled = true;
 #endif
-
 			// Activate the Google Play Games platform
 			PlayGamesPlatform.Activate();
 
-			LogIn();
+			if (!PlayerPrefs.HasKey("UseGooglePlayGames") || PlayerPrefs.GetInt("UseGooglePlayGames") == 1)
+			{
+				LogIn();
+			}
 		}
     }
+
+	public void ToggleLogin()
+	{
+		if(Social.Active.GetType() == typeof(PlayGamesPlatform) && Social.localUser.authenticated)
+		{
+			OnLogOut();
+		}
+		else
+		{
+			LogIn();
+		}
+	}
 	
     /// <summary>
     /// Login In Into Your Google+ Account
@@ -31,16 +46,29 @@ public class GooglePlayManager : MonoBehaviour
     {
         Social.localUser.Authenticate((bool success) =>
         {
-            if (success)
+			if (success)
             {
-                Debug.Log("Login Sucess");
+				Debug.Log("Login Sucess");
             }
             else
             {
-                Debug.Log("Login failed");
+				Debug.Log("Login failed");
             }
-        });
+
+			PlayerPrefs.SetInt("UseGooglePlayGames", success ? 1 : 0);
+			PlayerPrefs.Save();
+
+			UpdateUI(success);
+		});
     }
+
+	/// <summary>
+	/// Show the Achievements Menu
+	/// </summary>
+	public void OnShowAchievements()
+	{
+		Social.ShowAchievementsUI();
+	}
 
     /// <summary>
     /// Shows All Available Leaderborad
@@ -77,5 +105,32 @@ public class GooglePlayManager : MonoBehaviour
     public void OnLogOut()
     {
         ((PlayGamesPlatform)Social.Active).SignOut();
+
+		PlayerPrefs.SetInt("UseGooglePlayGames", 0);
+		PlayerPrefs.Save();
+
+		UpdateUI(false);
     }
+
+	public void UpdateUI(bool loggedIn)
+	{
+		GameObject gpmLogin = GameObject.Find("GooglePlayGamesLogin");
+		if (gpmLogin != null)
+		{
+			GooglePlayLogin gpmLoginScript = gpmLogin.GetComponent<GooglePlayLogin>();
+			gpmLogin.GetComponent<Image>().sprite = loggedIn ? gpmLoginScript.LoggedInImage : gpmLoginScript.LoggedOutImage;
+		}
+
+		GameObject leaderboardObj = GameObject.Find("Leaderboard");
+		if (leaderboardObj != null)
+		{
+			leaderboardObj.GetComponent<Button>().interactable = loggedIn;
+		}
+
+		GameObject achievementsObj = GameObject.Find("Achievements");
+		if (achievementsObj != null)
+		{
+			achievementsObj.GetComponent<Button>().interactable = loggedIn;
+		}
+	}
 }

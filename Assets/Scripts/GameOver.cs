@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using GooglePlayGames;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
-	
+
+	private GooglePlayManager GPM;
+
 	//These variable values are stolen from the MenuUI object.
 	private int sceneToStart = 1;
 	private PlayMusic playMusic;
@@ -18,6 +21,13 @@ public class GameOver : MonoBehaviour {
 			playMusic = menuUI.GetComponent<PlayMusic>();
 			sceneToStart = menuUI.GetComponent<StartOptions>().sceneToStart;
 		}
+		GameObject GPObject = GameObject.Find("GooglePlayManager");
+		if(GPObject != null)
+		{
+			bool loggedIn = Social.Active.GetType() == typeof(PlayGamesPlatform) && Social.localUser.authenticated;
+			GPM = GPObject.GetComponent<GooglePlayManager>();
+			GPM.UpdateUI(loggedIn);
+		}
 	} 
 
 	// Use this for initialization
@@ -29,14 +39,15 @@ public class GameOver : MonoBehaviour {
 		}
 
         GameObject.Find("ScoreLabel").GetComponent<Text>().text = "Score: " + GameController.Score;
-
-		GameObject GP = GameObject.Find("GooglePlayServices");
-		if(GP != null)
+		
+		if(GPM != null && Social.localUser.authenticated)
 		{
-			GooglePlayManager services = GP.GetComponent<GooglePlayManager>();
-            services.OnAddScoreToLeaderBoard(GameController.Score);
+			GPM.OnAddScoreToLeaderBoard(GameController.Score);
         }
-
+		else
+		{
+			GameObject.Find("Leaderboard").GetComponent<Button>().interactable = false;
+		}
     }
 
 	public void TryAgainButtonClicked()
@@ -47,5 +58,21 @@ public class GameOver : MonoBehaviour {
 			playMusic.PlaySelectedMusic(1);
 		}
 		SceneManager.LoadScene(sceneToStart);
+	}
+
+	public void LeaderboardClicked()
+	{
+		if (GPM != null)
+		{
+			GPM.OnShowLeaderBoard();
+		}
+	}
+
+	public void AchievementsClicked()
+	{
+		if (GPM != null)
+		{
+			GPM.OnShowAchievements();
+		}
 	}
 }

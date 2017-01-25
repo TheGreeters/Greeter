@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class AndroidOnly : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        if (Application.platform != RuntimePlatform.Android)
-        {
-            gameObject.SetActive(false);
-        }
+	void Awake()
+	{
+		gameObject.SetActive(Application.platform == RuntimePlatform.Android);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

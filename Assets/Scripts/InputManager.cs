@@ -13,6 +13,10 @@ public class InputManager : MonoBehaviour {
     private bool swipeRight = false;
     private bool tapped = false;
 
+	//Used to prevent menu navigation from causing your player to move when resuming
+	//...Basically a nasty hack to get around an annoying bug.
+	public bool InputEnabled = true;
+
     void Start()
     {
         dragDistance = Screen.width * 15 / 100; //dragDistance is 15% of screen width
@@ -20,7 +24,7 @@ public class InputManager : MonoBehaviour {
 
     void Update () {
         //Don't move if game paused
-        if (Time.timeScale > 0)
+        if (Time.timeScale > 0 && InputEnabled)
         {
             DetectTouches();
 
@@ -64,7 +68,7 @@ public class InputManager : MonoBehaviour {
             {
                 lp = touch.position;  //last touch position. Ommitted if you use list
 
-                //Check if drag distance is greater than 20% of the screen height
+                //Check if drag distance is greater than 15% of the screen width
                 if (Mathf.Abs(lp.x - fp.x) > dragDistance || Mathf.Abs(lp.y - fp.y) > dragDistance)
                 {//It's a drag
                  //check if the drag is vertical or horizontal
@@ -87,4 +91,14 @@ public class InputManager : MonoBehaviour {
             }
         }
     }
+
+	public void DisableInput()
+	{
+		InputEnabled = false;
+	}
+
+	public void EnableInput()
+	{
+		InputEnabled = true;
+	}
 }

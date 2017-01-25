@@ -39,14 +39,16 @@ public class Player_Actions : MonoBehaviour {
 
         currentLane = 2;
 
-        smallHappyZoneMin = gameObject.transform.position.z + 5f;
-        smallHappyZoneMax = gameObject.transform.position.z + 6f;
+		Transform lanes = GameObject.Find("Lanes").transform;
 
-        happyZoneMin = gameObject.transform.position.z + 4f;
-        happyZoneMax = gameObject.transform.position.z + 8f;
+        smallHappyZoneMin = lanes.position.z + 1f;
+        smallHappyZoneMax = lanes.position.z + 2f;
 
-        largeHappyZoneMin = gameObject.transform.position.z + 4f;
-        largeHappyZoneMax = gameObject.transform.position.z + 8f;
+        happyZoneMin = lanes.position.z;
+        happyZoneMax = lanes.position.z + 4f;
+
+        largeHappyZoneMin = lanes.position.z;
+		largeHappyZoneMax = lanes.position.z + 4f;
 
 	}
 	
@@ -144,7 +146,8 @@ public class Player_Actions : MonoBehaviour {
 
 			if (CustomerInHappyZone(closestCustomer))
             {
-				GameController.AddScore(mood * successMultiplier);
+				int angryBonus = mood >= 3 ? 2 : 0; //Give 5 points for "angry" customers instead of 3... They're really hard!
+				GameController.AddScore((mood + angryBonus) * successMultiplier);
 				GameController.AddSatisfaction(mood);
 
                 customerScript.Greeted = true;

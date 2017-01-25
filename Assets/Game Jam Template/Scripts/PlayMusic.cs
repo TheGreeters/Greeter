@@ -26,6 +26,7 @@ public class PlayMusic : MonoBehaviour {
 
 	public void PlayLevelMusic()
 	{
+		musicSource.loop = true;
 		//This switch looks at the last loadedLevel number using the scene index in build settings to decide which music clip to play.
 		switch (SceneManager.GetActiveScene().buildIndex)
 		{
@@ -47,7 +48,7 @@ public class PlayMusic : MonoBehaviour {
 	//Used if running the game in a single scene, takes an integer music source allowing you to choose a clip by number and play.
 	public void PlaySelectedMusic(int musicChoice)
 	{
-
+		musicSource.loop = true;
 		//This switch looks at the integer parameter musicChoice to decide which music clip to play.
 		switch (musicChoice) 
 		{

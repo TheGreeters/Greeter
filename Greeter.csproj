@@ -267,8 +267,10 @@
     <Compile Include="Assets\Scripts\Customer.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameOver.cs" />
+    <Compile Include="Assets\Scripts\GooglePlayLogin.cs" />
     <Compile Include="Assets\Scripts\GooglePlayManager.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Scripts\NoAndroid.cs" />
     <Compile Include="Assets\Scripts\Player_Actions.cs" />
     <Compile Include="Assets\Scripts\SpawnTimer.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />

@@ -57,7 +57,7 @@ public class Customer : MonoBehaviour {
             else
             {
                 GameObject.Find("ResponseLabel").GetComponent<Text>().text = "Awkward. Too far!";
-                GameObject.Find("ResponseLabel").GetComponent<Text>().color = Color.yellow;
+                GameObject.Find("ResponseLabel").GetComponent<Text>().color = Color.grey;
             }
             
             UpdateAnimator(2); //shake
